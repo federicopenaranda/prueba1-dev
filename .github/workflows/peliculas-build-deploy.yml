@@ -1,0 +1,80 @@
+# name: Build and Deploy Frontend apps to Hostgator Hosting
+
+# on:
+#   push:
+#     branches: [qa, production]
+
+# defaults:
+#   run:
+#     working-directory: ./frontend/peliculas
+
+# jobs:
+#   build:
+#     name: Build ⛏
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@main
+#       - name: Install dependencies
+#         run: npm install
+#       - name: Build dependencies (qa)
+#         if: ${{ github.ref_name == 'qa' }}
+#         run: npx -p @angular/cli ng build --base-href /peliculas-qa/ -c qa
+#       - name: Archive production artifact
+#         uses: actions/upload-artifact@main
+#         with:
+#           name: dist
+#           path: ./frontend/peliculas/dist/peliculas
+#   deploy:
+#     name: Deploy to QA 🚀
+#     needs: build
+#     environment: qa
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@main
+#       - name: Download artifact
+#         uses: actions/download-artifact@main
+#         with: 
+#           name: dist
+#           path: ./frontend/peliculas/dist/peliculas
+
+#       - name: Copy FE Files to Hosting (qa)
+#         if: ${{ github.ref_name == 'qa' }}
+#         uses: sebastianpopp/ftp-action@releases/v2
+#         with:
+#           host: ${{ vars.FTP_SERVER }}
+#           user: ${{ secrets.QA_FTP_USERNAME }}
+#           password: ${{ secrets.QA_FTP_PASSWORD }}
+#           localDir: './frontend/peliculas/dist/peliculas/'
+#           remoteDir: './'
+
+#       - name: Copy .htaccess files to hosting (QA)
+#         if: ${{ github.ref_name == 'qa' }}
+#         uses: sebastianpopp/ftp-action@releases/v2
+#         with:
+#           host: ${{ vars.FTP_SERVER }}
+#           user: ${{ secrets.QA_FTP_USERNAME }}
+#           password: ${{ secrets.QA_FTP_PASSWORD }}
+#           localDir: './frontend/peliculas/htaccess/qa/'
+#           remoteDir: './'
+
+#       - name: Copy FE Files to Hosting (production)
+#         if: ${{ github.ref_name == 'production' }}
+#         uses: sebastianpopp/ftp-action@releases/v2
+#         with:
+#           host: ${{ vars.FTP_SERVER }}
+#           user: ${{ secrets.PROD_FTP_USERNAME }}
+#           password: ${{ secrets.PROD_FTP_PASSWORD }}
+#           localDir: './frontend/peliculas/dist/peliculas/'
+#           remoteDir: './'
+
+#       - name: Copy .htaccess files to hosting (production)
+#         if: ${{ github.ref_name == 'production' }}
+#         uses: sebastianpopp/ftp-action@releases/v2
+#         with:
+#           host: ${{ vars.FTP_SERVER }}
+#           user: ${{ secrets.PROD_FTP_USERNAME }}
+#           password: ${{ secrets.PROD_FTP_PASSWORD }}
+#           localDir: './frontend/peliculas/htaccess/production/'
+#           remoteDir: './'
