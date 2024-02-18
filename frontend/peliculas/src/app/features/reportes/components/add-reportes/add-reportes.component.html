@@ -1,0 +1,85 @@
+<!-- <form [formGroup]="form" (ngSubmit)="crearReporte()">
+	<mat-card appearance="outlined" class="w-11/12 sm:w-2/3 md:w-2/3 lg:w-1/3 justify-items-center m-5 mr-5">
+		<div class="page-title mt-3">
+			<h1>Crear un Reporte</h1>
+		</div>
+		<mat-card-content>
+            <div>
+                <div class="flex align-top flex-col">
+                    <span class="flex items-center justify-between">
+                        <mat-form-field class="w-2/3">
+                            <mat-label>Código</mat-label>
+                            <input matInput formControlName="codigo_reporte">
+                            <mat-error *ngIf="form.get('codigo_reporte')?.errors">Debes ingresar un código válido</mat-error>
+                        </mat-form-field>
+                        <mat-slide-toggle
+                            class="mb-5"
+                            formControlName="estado_reporte"
+                            color="primary"
+                            checked="checked"
+                        >
+                            Activo?
+                        </mat-slide-toggle>
+                    </span>
+
+                    <mat-form-field>
+                        <mat-label>Nombre</mat-label>
+                        <input matInput formControlName="nombre_reporte">
+                        <mat-error *ngIf="form.get('nombre_reporte')?.errors">Debes ingresar un nombre válido</mat-error>
+                    </mat-form-field>
+                    <mat-form-field *ngIf="(tipoProceso$ | async) as tipoProcesos" class="w-full">
+                        <mat-label>Tipo de Proceso</mat-label>
+                        <mat-select formControlName="tipoProceso">
+                            <mat-option value="{{ tipoProceso.id_tipo_proceso }}" *ngFor="let tipoProceso of tipoProcesos">
+                                {{ tipoProceso.tipo_proceso_nombre }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="form.get('tipoProceso')?.errors">Debes elegir un tipo de proceso</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Descripción</mat-label>
+                        <textarea matInput formControlName="descripcion_reporte">
+                        </textarea>
+                        <mat-error *ngIf="form.get('descripcion_reporte')?.errors">Debes ingresar un código válido</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="file" accept=".doc,.docx" class="file-input" (change)="onFileSelected($event)" #fileUpload style="display: none;">
+                        <span class="flex items-center">
+                            <input type="text" matInput formControlName="ruta_reporte" [disabled]="true" class="rounded-l-lg pointer-events-none">
+                            <button
+                                mat-mini-fab
+                                type="button" 
+                                color="primary" 
+                                class="rounded-r-lg" 
+                                (click)="fileUpload.click()"
+                            >
+                                <mat-icon>attach_file</mat-icon>
+                            </button>
+                        </span>
+                    </mat-form-field>
+                </div>
+                <span class="flex flex-row justify-between">
+                    <button
+                        mat-stroked-button
+                        color="warn"
+                        routerLink="'procesos'"
+                    >
+                        <mat-icon>remove</mat-icon>
+                        Cancelar
+                    </button>
+                    <button
+                        [disabled]="!form.valid" 
+                        type="submit"
+                        class="md-small"
+                        mat-raised-button
+                        color="accent"
+                    >
+                        <mat-icon>save</mat-icon>
+                        Guardar
+                    </button>
+                </span>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</form>
+ -->

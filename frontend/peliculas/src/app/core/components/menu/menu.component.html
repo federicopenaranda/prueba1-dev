@@ -1,0 +1,152 @@
+<mat-nav-list class="content">
+	<div class="top">
+		<!-- <a
+			*ngIf="isLogged()"
+			mat-list-item>
+			<span class="menu_item">
+				<mat-icon class="icon">settings</mat-icon>
+				<span class="label ml-2">Procesos</span>
+			</span>
+		</a> -->
+		<!-- <mat-list style="margin-left: 20px;">
+			<a
+				class="mat-mdc-list-item-interactive"
+				*ngIf="isLogged()"
+				(click)="onToggleMenu()"
+				mat-list-item
+				[routerLinkActiveOptions]="{ exact: true }"
+				[routerLink]="'/procesos/exportaciones'"
+				routerLinkActive="menu-active">
+				<span class="menu_item">
+					<mat-icon class="icon" routerLinkActive="menu-active-text">ios_share</mat-icon>
+					<span class="label ml-2" routerLinkActive="menu-active-text">Exportaciones</span>
+				</span>
+			</a>
+			<a
+				class="mat-mdc-list-item-interactive"
+				*ngIf="isLogged()"
+				(click)="onToggleMenu()"
+				mat-list-item
+				[routerLinkActiveOptions]="{ exact: true }"
+				[routerLink]="'/procesos/importaciones'"
+				routerLinkActive="menu-active">
+				<span class="menu_item">
+					<mat-icon class="icon" routerLinkActive="menu-active-text">system_update_alt</mat-icon>
+					<span class="label ml-2" routerLinkActive="menu-active-text">Importaciones</span>
+				</span>
+			</a>
+		</mat-list> -->
+		<!-- <a
+			*ngIf="isLogged()"
+			(click)="onToggleMenu()"
+			mat-list-item
+			[routerLinkActiveOptions]="{ exact: true }"
+			[routerLink]="'/procesos/tipo-proceso'"
+			routerLinkActive="menu-active">
+			<span class="menu_item">
+				<mat-icon class="icon" routerLinkActive="menu-active-text">category</mat-icon>
+				<span class="label ml-2" routerLinkActive="menu-active-text">Tipos de Procesos</span>
+			</span>
+		</a> -->
+		<!-- <a
+			*ngIf="isLogged()"
+			(click)="onToggleMenu()"
+			mat-list-item
+			[routerLinkActiveOptions]="{ exact: true }"
+			[routerLink]="'/procesos/clientes'"
+			routerLinkActive="menu-active">
+			<span class="menu_item">
+				<mat-icon class="icon" routerLinkActive="menu-active-text">groups</mat-icon>
+				<span class="label ml-2" routerLinkActive="menu-active-text">Clientes</span>
+			</span>
+		</a> -->
+		<a
+			*ngIf="isLogged()"
+			(click)="onToggleMenu()"
+			mat-list-item
+			[routerLinkActiveOptions]="{ exact: true }"
+			[routerLink]="'/reportes'"
+			routerLinkActive="menu-active">
+			<span class="menu_item">
+				<mat-icon class="icon" routerLinkActive="menu-active-text">insert_chart</mat-icon>
+				<span class="label ml-2" routerLinkActive="menu-active-text">Reportes</span>
+			</span>
+		</a>
+		<a
+			*ngIf="isLogged()"
+			(click)="onToggleMenu()"
+			mat-list-item
+			[routerLinkActiveOptions]="{ exact: true }"
+			[routerLink]="'/usuarios'"
+			routerLinkActive="menu-active">
+			<span class="menu_item">
+				<mat-icon class="icon" routerLinkActive="menu-active-text">person</mat-icon>
+				<span class="label ml-2" routerLinkActive="menu-active-text">Usuarios</span>
+			</span>
+		</a>
+		<!-- <a
+			*ngIf="isLogged()"
+			mat-list-item
+			[routerLinkActiveOptions]="{ exact: true }"
+			[routerLink]="'/garage/garage-admin'"
+			routerLinkActive="menu-active"
+		>
+			<span class="menu_item">
+				<mat-icon class="icon nav-icon" routerLinkActive="menu-active-text">archive</mat-icon>
+				<span class="label" routerLinkActive="menu-active-text">Importaciones</span>
+			</span>
+		</a>
+		<a
+			*ngIf="isLogged()"
+			mat-list-item
+			[routerLinkActiveOptions]="{ exact: true }"
+			[routerLink]="'/user/user-admin'"
+			routerLinkActive="menu-active"
+		>
+			<span class="menu_item">
+				<mat-icon class="icon nav-icon" routerLinkActive="menu-active-text">person</mat-icon>
+				<span class="label" routerLinkActive="menu-active-text">Usuarios</span>
+			</span>
+		</a> -->
+	</div>
+	<div class="bottom">
+		<a
+			(click)="onToggleMenu()"
+			mat-list-item
+			[routerLinkActiveOptions]="{ exact: true }"
+			[routerLink]="'/inicio'"
+			routerLinkActive="menu-active"
+			style="margin-top: auto">
+			<span class="menu_item">
+				<mat-icon class="icon" routerLinkActive="menu-active-text">home</mat-icon>
+				<span class="label ml-2" routerLinkActive="menu-active-text">Inicio</span>
+			</span>
+		</a>
+		<a
+			(click)="onToggleMenu()"
+			*ngIf="isLogged()"
+			(click)="salir()"
+            (keyup)="salir()"
+			mat-list-item
+			style="margin-top: auto"
+            tabindex="0">
+			<span class="menu_item">
+				<mat-icon class="icon">logout</mat-icon>
+				<span class="label ml-2">Salir</span>
+			</span>
+		</a>
+		<a
+			*ngIf="!isLogged()"
+			mat-list-item
+			[routerLinkActiveOptions]="{ exact: true }"
+			[routerLink]="'/admin/login'"
+			routerLinkActive="menu-active"
+			style="margin-top: auto"
+			tabindex="0">
+			<span class="menu_item">
+				<mat-icon class="icon" routerLinkActive="menu-active-text">login</mat-icon>
+				<span class="label ml-2" routerLinkActive="menu-active-text">Ingresar</span>
+			</span>
+		</a>
+	</div>
+</mat-nav-list>
