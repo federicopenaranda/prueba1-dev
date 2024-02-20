@@ -17,8 +17,6 @@ export const constants = {
 	// Route for auth --> Login
 	API_LOGIN: API_BASE_URL + '/auth/login',
 
-	API_ARCHIVOS_PROCESO: API_BASE_URL + '/archivos',
-
 	// Route for auth --> Logout
 	API_LOGOUT: API_BASE_URL + '/auth/logout',
 
@@ -36,5 +34,11 @@ export const constants = {
 
 	// Route for table "auth" --> Verify token
 	API_VERIFY_ACCESS_TOKEN: API_BASE_URL + '/auth/verify-token',
+
+	API_REPORTES: API_BASE_URL + '/reportes',
+
+	API_PELICULA: API_BASE_URL + '/pelicula',
+
+	API_ARCHIVOS_PELICULA: API_BASE_URL + '/archivos',
 
 };

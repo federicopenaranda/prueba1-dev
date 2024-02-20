@@ -49,21 +49,23 @@ export class UserDataSource extends DataSource<User> {
 	}
 
 	loadUser(filter: string, sort: string, sortColumn: string, pageNumber: number, pageSize: number): void {
-		this.loadingSubject.next(true);
 
-		this.userService
-			.getUsers(filter, sort, sortColumn, pageNumber, pageSize)
-			.pipe(
-				catchError(() => of([])),
-				finalize(() => this.loadingSubject.next(false))
-			)
-			.subscribe((user: any) => {
-				if ( user.data && user.data.length > 0 ) {
-					this.data = user.data;
-					this.totalCount = user.totalCount;
-					this.userSubject.next(user.data);
-				}
-			});
+		try {
+			this.loadingSubject.next(true);
+			const user: any = this.userService.getUsers(filter, sort, sortColumn, pageNumber, pageSize)
+			
+			if ( user.data && user.data.length > 0 ) {
+				this.data = user.data;
+				this.totalCount = user.totalCount;
+				this.userSubject.next(user.data);
+			}
+		} catch(error){
+			of([]);
+		} finally {
+			this.loadingSubject.next(false);
+		}
+
+			
 	}
 
 	constructor(private userService: UserService) {

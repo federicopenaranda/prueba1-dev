@@ -20,23 +20,11 @@ import { DynamicTimeComponent } from './components/field-types/dynamic-time/dyna
 import { DynamicCountryComponent } from './components/field-types/dynamic-country/dynamic-country.component';
 import { DynamicTimezoneComponent } from './components/field-types/dynamic-timezone/dynamic-timezone.component';
 import { DynamicUnitComponent } from './components/field-types/dynamic-unit/dynamic-unit.component';
+import { ModalVerificaEliminarComponent } from './components/modals/modal-elimina-tipo/modal-verifica-eliminar.component';
+
 
 @NgModule({
     imports: [
-        DynamicFormComponent,
-        DynamicFieldComponent,
-        DynamicInputComponent,
-        DynamicSelectComponent,
-        DynamicRadioComponent,
-        DynamicCheckboxComponent,
-        DynamicFileComponent,
-        DynamicTextareaComponent,
-        DynamicDateComponent,
-        DynamicTimeComponent,
-        DynamicCountryComponent,
-        DynamicTimezoneComponent,
-        DynamicUnitComponent,
-        DynamicErrorComponent,
         CommonModule,
         RouterModule,
         ReactiveFormsModule,
@@ -55,7 +43,22 @@ import { DynamicUnitComponent } from './components/field-types/dynamic-unit/dyna
     declarations: [
       DynamicErrorComponent,
       DynamicFieldComponent,
-      DynamicFormComponent
+      DynamicFormComponent,
+      DynamicFormComponent,
+      DynamicFieldComponent,
+      DynamicInputComponent,
+      DynamicSelectComponent,
+      DynamicRadioComponent,
+      DynamicCheckboxComponent,
+      DynamicFileComponent,
+      DynamicTextareaComponent,
+      DynamicDateComponent,
+      DynamicTimeComponent,
+      DynamicCountryComponent,
+      DynamicTimezoneComponent,
+      DynamicUnitComponent,
+      DynamicErrorComponent,
+      ModalVerificaEliminarComponent
     ]
 })
 export class SharedModule { }

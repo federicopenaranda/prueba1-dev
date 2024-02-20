@@ -13,14 +13,9 @@ export class AppComponent {
   ) { }
 
   ngOnInit() {
-    this.loginService.isAccessTokenValid()
-    .subscribe(
-      (response) => {
-        if (!response) {
-          this.loginService.logOut();
-        }
-      }
-    );
+    const response = this.loginService.isAccessTokenValid()
+    if (!response) {
+      this.loginService.logOut();
     }
-  
+  }
 }

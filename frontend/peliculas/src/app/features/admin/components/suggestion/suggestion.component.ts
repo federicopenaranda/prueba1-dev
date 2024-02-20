@@ -23,12 +23,12 @@ export class SuggestionComponent implements OnInit {
 
 	onSubmit(): void {
 		this.loaderService.setMessage('Enviando sugerencia');
-		this.suggestionService.createSuggestion(this.formService.form.value)
-		.subscribe((result: unknown) => {
-			this.suggestionSent = true;
-			setTimeout(() => this.dialogRef.close({ result: true }), 1800);
-			this.formService.initializeFormGroup();
-		});
+
+		const result: unknown = this.suggestionService.createSuggestion(this.formService.form.value)
+    
+    this.suggestionSent = true;
+    setTimeout(() => this.dialogRef.close({ result: true }), 1800);
+    this.formService.initializeFormGroup();
 	}
 
 	close(): void {

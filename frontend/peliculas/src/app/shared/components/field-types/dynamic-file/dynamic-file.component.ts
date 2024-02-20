@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
-import { ProcesoService } from 'src/app/features/proceso/services/proceso.service';
+import { PeliculasService } from 'src/app/features/peliculas/services/peliculas.service';
 import { constants } from '../../../../shared/api.constants';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalVerificaEliminarComponent } from '../../modals/modal-elimina-tipo/modal-verifica-eliminar.component';
@@ -18,7 +18,7 @@ export class DynamicFileComponent implements OnInit {
     formName!: FormGroup;
     selectedFileName = '';
     fileName: string | null = '';
-    fileServer = constants.API_ARCHIVOS_PROCESO;
+    fileServer = constants.API_ARCHIVOS_PELICULA;
 
     fileTypeConverted = '';
     fileTypeMappings: Record<string, string> = {
@@ -32,7 +32,7 @@ export class DynamicFileComponent implements OnInit {
 
     constructor(
         private loaderService: LoaderService,
-        private procesoService: ProcesoService,
+        private peliculasService: PeliculasService,
         private formgroupDirective: FormGroupDirective,
         private dialog: MatDialog,
         private snackBar: MatSnackBar
@@ -54,16 +54,14 @@ export class DynamicFileComponent implements OnInit {
             // this.fileName = file.name;
             const formData = new FormData();
             formData.append("file", file);
-            this.procesoService.upload(formData).subscribe({
-                next: (res: any) => {
-                    if (res.body?.filename) {
-                        this.fileName = res.body.filename;
-                        const cont = this.formName.get(this.field.fieldName);
-                        cont?.setValue(res.body.filename);
-                        console.log(cont);
-                    }
-                }
-            })
+
+            const res: any = this.peliculasService.upload(formData)
+            if (res.body?.filename) {
+                this.fileName = res.body.filename;
+                const cont = this.formName.get(this.field.fieldName);
+                cont?.setValue(res.body.filename);
+                console.log(cont);
+            }
         }
     }
 
@@ -82,26 +80,23 @@ export class DynamicFileComponent implements OnInit {
         });
     }
 
-    onDeleteFile(field: any) {
+    async onDeleteFile(field: any) {
         const campoId = +field.fieldName.split('-')[1];
         if (campoId) {
-            this.procesoService.deleteArchivoCampo(campoId).subscribe({
-                next: (result) => {
-                    if (result) {
-                        this.field.value = null;
-                        this.fileName = null;
-                        const ctrl = this.formName.get(field.fieldName);
-                        ctrl?.setValue(null);
-                        this.snackBar.open('Archivo eliminado', 'Mensaje', {
-                            duration: 3000, verticalPosition: 'top'
-                        });
-                    } else {
-                        this.snackBar.open('Error al eliminar el archivo', 'Error', {
-                            duration: 3000, verticalPosition: 'top'
-                        });
-                    }
-                }
-            });
+            const result = await this.peliculasService.deleteArchivoCampo(campoId)
+            if (result) {
+                this.field.value = null;
+                this.fileName = null;
+                const ctrl = this.formName.get(field.fieldName);
+                ctrl?.setValue(null);
+                this.snackBar.open('Archivo eliminado', 'Mensaje', {
+                    duration: 3000, verticalPosition: 'top'
+                });
+            } else {
+                this.snackBar.open('Error al eliminar el archivo', 'Error', {
+                    duration: 3000, verticalPosition: 'top'
+                });
+            }
         }
     }
 }

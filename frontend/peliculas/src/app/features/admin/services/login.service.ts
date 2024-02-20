@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { firstValueFrom, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { constants } from '../../../shared/api.constants';
@@ -30,42 +30,42 @@ export class LoginService {
         return localStorage.getItem('peliculasRole') || '';
     }
 
-    loginJwt(email: string, password: string) {
-        return this.http.post<LoginResponse>(constants.API_LOGIN, { email, password }, httpOptions)
+    async loginJwt(email: string, password: string) {
+        return await firstValueFrom(this.http.post<LoginResponse>(constants.API_LOGIN, { email, password }, httpOptions)
             .pipe(
                 tap((res: LoginResponse) => this.utilsService.log(`Login result: ${res}`)),
                 catchError(this.utilsService.handleError<LoginResponse>('login'))
-            );
+            ));
     }
 
     getAccessToken(): string {
         return localStorage.getItem('peliculasAccess') || '';
     }
 
-    isAccessTokenValid() {
+    async isAccessTokenValid() {
         if (!localStorage.getItem('peliculasAccess')) {
             return of(false);
         } else {
-            return this.http.post<boolean>(
+            return await firstValueFrom(this.http.post<boolean>(
                 constants.API_VERIFY_ACCESS_TOKEN,
                 { refreshToken: this.getAccessToken() },
                 httpOptions
             )
             .pipe(
                 catchError(this.utilsService.handleError<unknown>('verify-token'))
-            );
+            ));
         }
     }
 
-    logOut() {
+    async logOut() {
         localStorage.removeItem('peliculasLogin');
         localStorage.removeItem('peliculasAccess');
         localStorage.removeItem('peliculasRefresh');
         // localStorage.removeItem('peliculasRole');
-		return this.http.delete<boolean>(constants.API_LOGOUT, httpOptions)
+		return await firstValueFrom(this.http.delete<boolean>(constants.API_LOGOUT, httpOptions)
             .pipe(
                 tap((res) => console.log(`Logout result: ${res}`))
-            );
+            ));
 	}
 
 

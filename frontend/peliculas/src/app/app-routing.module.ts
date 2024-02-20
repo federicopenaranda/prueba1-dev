@@ -14,7 +14,15 @@ const routes: Routes = [
 		path: 'usuarios',
 		loadChildren: () => import('./features/user/user.module').then((m) => m.UserModule),
 	},
-  {
+	{
+		path: 'peliculas',
+		loadChildren: () => import('./features/peliculas/peliculas.module').then((m) => m.PeliculasModule),
+	},
+	{
+		path: 'reportes',
+		loadChildren: () => import('./features/reportes/reportes.module').then((m) => m.ReportesModule),
+	},
+	{
 		path: '**',
 		redirectTo: '/admin/login',
 	},

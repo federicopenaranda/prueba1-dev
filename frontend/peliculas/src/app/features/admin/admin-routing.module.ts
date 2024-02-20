@@ -7,19 +7,19 @@ import { HelpInfoComponent } from "./components/help-info/help-info.component";
 const routes: Routes = [
     {
         path: '',
-        component: LoginComponent,
+        loadChildren: () => import('./components/login/login.component').then((m) => m.LoginComponent),
     },
     {
         path: 'login',
-        component: LoginComponent,
+        loadChildren: () => import('./components/login/login.component').then((m) => m.LoginComponent),
     },
     {
         path: 'sugerencia',
-        component: SuggestionComponent,
+        loadChildren: () => import('./components/suggestion/suggestion.component').then((m) => m.SuggestionComponent),
     },
     {
         path: 'help-info',
-        component: HelpInfoComponent,
+        loadChildren: () => import('./components/help-info/help-info.component').then((m) => m.HelpInfoComponent),
     },
 
 ];

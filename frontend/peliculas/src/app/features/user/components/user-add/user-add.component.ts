@@ -41,16 +41,16 @@ export class UserAddComponent {
 		});
 	}
 
-	onSubmit(): void {
+	async onSubmit(): Promise<void> {
 		this.loaderService.setMessage('Creando usuario');
-		this.userService.createUser(this.formService.form.value)
-			.subscribe((user: User) => {
-				if (this.embedded) {
-					this.addUserResult.emit({ result: 'saved', data: user });
-				} else {
-					this.router.navigate(['/usuarios']);
-				}
-			});
+
+		const user:User = await this.userService.createUser(this.formService.form.value)
+    
+    if (this.embedded) {
+      this.addUserResult.emit({ result: 'saved', data: user });
+    } else {
+      this.router.navigate(['/usuarios']);
+    }
 	}
 
 	onCancel(): void {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { Suggestion } from '../../../shared/models/suggestion.model';
@@ -16,11 +16,11 @@ export class SuggestionService {
 		private utilsService: UtilsService
 	) {}
 
-	createSuggestion(suggestion: Suggestion): Observable<Suggestion> {
-		return this.http.post<Suggestion>(constants.API_SUGGESTION, suggestion, httpOptions).pipe(
+	async createSuggestion(suggestion: Suggestion): Promise<Suggestion> {
+		return await firstValueFrom(this.http.post<Suggestion>(constants.API_SUGGESTION, suggestion, httpOptions).pipe(
 			tap((newSuggestion: Suggestion) => this.utilsService.log(`added Suggestion w/ id=${newSuggestion.id_suggestion}`)),
 			catchError(this.utilsService.handleError<Suggestion>('addSuggestion'))
-		);
+		));
 	}
 
 }

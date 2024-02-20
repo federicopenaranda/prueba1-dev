@@ -48,20 +48,22 @@ export class ListReportesDataSource extends DataSource<Reporte> {
 	}
 
 	loadTable(filter: string, sort: string, sortColumn: string, pageNumber: number, pageSize: number): void {
-		this.loadingSubject.next(true);
-		this.service
-			.getReportes(filter, sort, sortColumn, pageNumber, pageSize)
-			.pipe(
-				catchError(() => of([])),
-				finalize(() => this.loadingSubject.next(false))
-			)
-			.subscribe((item: any) => {
-				if ( item.data && item.data.length > 0 ) {
-					this.data = item.data;
-					this.totalCount = item.totalCount;
-					this.itemSubject.next(item.data);
-				}
-			});
+
+		try {
+			this.loadingSubject.next(true);
+			const item: any = this.service.getReportes(filter, sort, sortColumn, pageNumber, pageSize);
+
+			if ( item.data && item.data.length > 0 ) {
+				this.data = item.data;
+				this.totalCount = item.totalCount;
+				this.itemSubject.next(item.data);
+			}
+		} catch(error){
+			of([]);
+		} finally {
+			this.loadingSubject.next(false);
+		}
+
 	}
 
     // eslint-disable-next-line no-unused-vars

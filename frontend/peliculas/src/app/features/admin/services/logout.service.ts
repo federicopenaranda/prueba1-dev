@@ -4,6 +4,7 @@ import { catchError, tap } from 'rxjs/operators';
 
 import { constants } from '../../../shared/api.constants';
 import { httpOptions } from '../../../shared/utils/app.utils';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',
@@ -13,13 +14,13 @@ export class LogoutService {
 		private http: HttpClient
 	) {}
 
-	logOut() {
+	async logOut() {
 		localStorage.removeItem('peliculasLogin');
 		localStorage.removeItem('peliculasAccess');
 		localStorage.removeItem('peliculasRefresh');
 		localStorage.removeItem('peliculasRole');
-		return this.http.delete<any>(constants.API_LOGOUT, httpOptions).pipe(
+		return firstValueFrom(this.http.delete<any>(constants.API_LOGOUT, httpOptions).pipe(
 			tap((res: any) => console.log(`Logout result: ${res}`))
-		);
+		));
 	}
 }
