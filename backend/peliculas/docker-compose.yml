@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:16.2
+    container_name: peliculas
+    restart: always
+    environment:
+      POSTGRES_DB: peliculas
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
