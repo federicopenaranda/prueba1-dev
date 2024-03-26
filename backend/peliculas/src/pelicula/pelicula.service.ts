@@ -76,6 +76,5 @@ export class PeliculaService {
     throw new InternalServerErrorException('Unexpected error, check server logs');
 
   }
-
 }
 

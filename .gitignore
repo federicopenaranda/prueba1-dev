@@ -34,11 +34,11 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 
-frontend/import-export/node_modules
-backend/import-export/node_modules
+frontend/peliculas/node_modules
+backend/peliculas/node_modules
 
-backend/import-export/dist
-backend/import-export/uploads
-backend/import-export/reportes
-frontend/import-export/dist
+backend/peliculas/dist
+backend/peliculas/uploads
+backend/peliculas/reportes
+frontend/peliculas/dist
 
